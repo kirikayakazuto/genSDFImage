@@ -7,11 +7,12 @@
 #define INPUT_NAME "/Users/hortor/self_project/SDF_proj/SDF_Proj/SDF_Proj/star.png"
 
 #define OUTPUT_NAME "/Users/hortor/self_project/SDF_proj/SDF_Proj/SDF_Proj/starsdf"
-#define OUTPUT_WIDTH 128
-#define OUTPUT_HEIGHT 128
 
-#define MAX_DISTANCE 512
-#define PNG_TRESHOLD 127
+#define OUTPUT_WIDTH 32        // 输出大小
+#define OUTPUT_HEIGHT 32       //
+
+#define MAX_DISTANCE 32        // 最大距离
+#define PNG_TRESHOLD 127        // 阈值
 
 unsigned char output[2 + OUTPUT_WIDTH * OUTPUT_HEIGHT];
 double buffer[OUTPUT_WIDTH * OUTPUT_HEIGHT];
@@ -48,9 +49,9 @@ void set_pixel(int x, int y)
     if (maxy > (int)input_height) {
         maxy = input_height;
     }
-
+    // 求目标颜色的alpha值
     source_is_inside = input[(cx + cy * input_width) << 2] > PNG_TRESHOLD;
-    if (source_is_inside) {
+    if (source_is_inside) {         // 这个点是需要显示的, 那么计算周围颜色值
         for (iy = miny; iy < maxy; iy++) {
             dy = iy - cy;
             dy *= dy;
